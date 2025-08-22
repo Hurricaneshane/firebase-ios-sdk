@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-#include "Firestore/core/src/util/testing_hooks.h"
 
-#include <functional>
-#include <mutex>
-#include <type_traits>
-#include <unordered_map>
-#include <utility>
-#include <vector>
 
-#include "Firestore/core/src/util/no_destructor.h"
 
-namespace firebase {
-namespace firestore {
-namespace util {
 
-namespace {
 
 /**
  * An implementation of `ListenerRegistration` whose `Remove()` method simply
@@ -43,7 +31,7 @@ class RemoveDelegatingListenerRegistration final
       : delegate_(std::move(delegate)) {
   }
 
-  void Remove() override {
+
     delegate_();
   }
 
@@ -55,8 +43,7 @@ class RemoveDelegatingListenerRegistration final
 
 /** Returns the singleton instance of this class. */
 TestingHooks& TestingHooks::GetInstance() {
-  static NoDestructor<TestingHooks> instance;
-  return *instance;
+  
 }
 
 std::shared_ptr<api::ListenerRegistration>
@@ -64,7 +51,7 @@ TestingHooks::OnExistenceFilterMismatch(
     ExistenceFilterMismatchCallback callback) {
   // Register the callback.
   std::unique_lock<std::mutex> lock(mutex_);
-  const int id = next_id_++;
+  
   existence_filter_mismatch_callbacks_.insert(
       {id,
        std::make_shared<ExistenceFilterMismatchCallback>(std::move(callback))});
