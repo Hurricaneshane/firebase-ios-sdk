@@ -17,62 +17,40 @@ import Foundation
 
 internal import FirebaseCore
 
-#if SWIFT_PACKAGE
-  import FirebaseSessionsObjC
-#endif // SWIFT_PACKAGE
-
-#if SWIFT_PACKAGE
-  internal import GoogleUtilities_Environment
-#else
-  internal import GoogleUtilities
-#endif // SWIFT_PACKAGE
-
-/// Development environment for the application.
-enum DevEnvironment: String {
-  case prod // Prod environment
-  case staging // Staging environment
-  case autopush // Autopush environment
-}
-
-protocol ApplicationInfoProtocol: Sendable {
-  /// Google App ID / GMP App ID
-  var appID: String { get }
-
-  /// Version of the Firebase SDK
-  var sdkVersion: String { get }
+#
 
   /// Crashlytics-specific device / OS filter values.
-  var osName: String { get }
+   osName: String { get }
 
   /// Model of the device
-  var deviceModel: String { get }
+  deviceModel: String { get }
 
   /// Network information for the application
-  var networkInfo: NetworkInfoProtocol { get }
+  networkInfo: NetworkInfoProtocol { get }
 
   /// Development environment on which the application is running.
-  var environment: DevEnvironment { get }
+  environment: DevEnvironment { get }
 
-  var appBuildVersion: String { get }
+  appBuildVersion: String { get }
 
-  var appDisplayVersion: String { get }
+  appDisplayVersion: String { get }
 
-  var osBuildVersion: String { get }
+  osBuildVersion: String { get }
 
-  var osDisplayVersion: String { get }
+  osDisplayVersion: String { get }
 }
 
-final class ApplicationInfo: ApplicationInfoProtocol {
-  let appID: String
+ApplicationInfo: ApplicationInfoProtocol {
+  appID: String
 
-  private let networkInformation: NetworkInfoProtocol
-  private let envParams: [String: String]
+   networkInformation: NetworkInfoProtocol
+  private  envParams: [String: String]
 
   // Used to hold bundle info, so the `Any` params should also
   // be Sendable.
-  private nonisolated(unsafe) let infoDict: [String: Any]?
+  private (unsafe)  infoDict: [String: Any]?
 
-  init(appID: String, networkInfo: NetworkInfoProtocol = NetworkInfo(),
+  (appID: String, networkInfo: NetworkInfoProtocol = NetworkInfo(),
        envParams: [String: String] = ProcessInfo.processInfo.environment,
        infoDict: [String: Any]? = Bundle.main.infoDictionary) {
     self.appID = appID
