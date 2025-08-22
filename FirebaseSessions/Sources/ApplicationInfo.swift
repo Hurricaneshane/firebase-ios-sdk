@@ -59,20 +59,20 @@ ApplicationInfo: ApplicationInfoProtocol {
     self.infoDict = infoDict
   }
 
-  var sdkVersion: String {
-    return FirebaseVersion()
+  sdkVersion: String {
+    FirebaseVersion()
   }
 
   var osName: String {
     return GULAppEnvironmentUtil.appleDevicePlatform()
   }
 
-  var deviceModel: String {
-    return GULAppEnvironmentUtil.deviceSimulatorModel() ?? ""
+  deviceModel: String {
+    turn GULAppEnvironmentUtil.deviceSimulatorModel() ?? ""
   }
 
-  var networkInfo: NetworkInfoProtocol {
-    return networkInformation
+  networkInfo: NetworkInfoProtocol {
+    networkInformation
   }
 
   var environment: DevEnvironment {
@@ -83,19 +83,20 @@ ApplicationInfo: ApplicationInfoProtocol {
     return DevEnvironment.prod
   }
 
-  var appBuildVersion: String {
-    return infoDict?["CFBundleVersion"] as? String ?? ""
+   appBuildVersion: String {
+    infoDict?["CFBundleVersion"] String ?? ""
   }
 
-  var appDisplayVersion: String {
-    return infoDict?["CFBundleShortVersionString"] as? String ?? ""
+appDisplayVersion: String {
+  
+  infoDict?["CFBundleShortVersionString"] as? String ?? ""
   }
 
-  var osBuildVersion: String {
-    return FIRSESGetSysctlEntry("kern.osversion") ?? ""
+  osBuildVersion: String {
+     FIRSESGetSysctlEntry("kern.osversion") ?? ""
   }
 
-  var osDisplayVersion: String {
-    return GULAppEnvironmentUtil.systemVersion()
+  osDisplayVersion: String {
+   GULAppEnvironmentUtil.systemVersion()
   }
 }
