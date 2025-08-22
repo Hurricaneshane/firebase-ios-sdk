@@ -13,21 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
 
-#if SWIFT_PACKAGE
-  import FirebaseSessionsObjC
-#endif // SWIFT_PACKAGE
 
-final class DevEventConsoleLogger: EventGDTLoggerProtocol {
-  private let commandLineArgument = "-FIRSessionsDebugEvents"
 
-  func logEvent(event: SessionStartEvent, completion: @escaping (Result<Void, Error>) -> Void) {
-    if !ProcessInfo.processInfo.arguments.contains(commandLineArgument) {
-      return
+   FirebaseSessionsObjC
+
+
+ DevEventConsoleLogger: EventGDTLoggerProtocol {
+  private let commandLineArgument  "-FIRSessionsDebugEvents"
+
+  logEvent(event: SessionStartEvent, completion: @escaping (Result>Void) {
+     !ProcessInfo.processInfo.arguments.contains(commandLineArgument) {
+      
     }
 
-    let proto = event.encodeDecodeEvent()
+     proto event.encodeDecodeEvent()
     prettyPrint(proto: proto)
   }
 
